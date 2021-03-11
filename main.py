@@ -1,7 +1,11 @@
-import Constans as keys
 from telegram.ext import *
 import Responses as R
 import logging
+
+import os
+from os import environ
+
+API_KEY = environ['TELEGRAM_API_KEY']
 
 ### TODO ###
 # 1. Call saveDhvWetter periodisch
@@ -27,7 +31,7 @@ def error(update, context):
     print(f"Update {update} caused error {context.error}")
 
 def main():
-    updater = Updater(keys.API_KEY, use_context=True)
+    updater = Updater(API_KEY, use_context=True)
     dp = updater.dispatcher
     
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
