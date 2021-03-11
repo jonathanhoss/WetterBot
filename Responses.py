@@ -1,4 +1,5 @@
 import json
+import saveDhvWetter
 
 def loadJson():
     with open('data.json', encoding='utf-8') as fh:
@@ -28,3 +29,7 @@ def sample_responses(input_text):
     if user_message in ("allgemein", "/allgemein"):
         wetter = loadJson()
         return stringifyWetter(wetter["allgemein"]) + navigation
+
+    if user_message in ("update"):
+        saveDhvWetter.saveDhvWetter()
+        return "Wetter wurde geupdatet"
