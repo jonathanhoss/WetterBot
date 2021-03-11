@@ -3,13 +3,18 @@ from telegram.ext import *
 import Responses as R
 import logging
 
+### TODO ###
+# 1. Call saveDhvWetter periodisch
+# 2. 
+
+
 print("Bot started ...")
 
 def start_command(update, context):
     update.message.reply_text('Type something!')
 
 def help_command(update, context):
-    update.message.reply_text('Help!')
+    update.message.reply_text('Für den DHV Wetterbericht: \n /allgemein \n /nord \n /sued \n')
 
 def handle_message(update, context):
     text =str(update.message.text).lower()
@@ -29,7 +34,7 @@ def main():
                      level=logging.INFO)
     
     dp.add_handler(CommandHandler("start", start_command))
-    dp.add_handler(CommandHandler("start", help_command))
+    dp.add_handler(CommandHandler("help", help_command))
 
     dp.add_handler(MessageHandler(Filters.text, handle_message))
 
@@ -37,6 +42,5 @@ def main():
 
     updater.start_polling()
     updater.idle()
-
 
 main()
