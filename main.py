@@ -5,8 +5,7 @@ import logging
 import os
 from os import environ
 
-# API_KEY = environ['TELEGRAM_API_KEY'] 
-API_KEY = '1609832218:AAGKgAvhcGsND1b483K0Grd_a_5xr4smQS8'
+API_KEY = environ['TELEGRAM_API_KEY'] 
 
 print("Bot started ...")
 
