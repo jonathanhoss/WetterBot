@@ -5,17 +5,13 @@ import logging
 import os
 from os import environ
 
-API_KEY = environ['TELEGRAM_API_KEY']
-
-### TODO ###
-# 1. Call saveDhvWetter periodisch
-# 2. 
-
+# API_KEY = environ['TELEGRAM_API_KEY'] 
+API_KEY = '1609832218:AAGKgAvhcGsND1b483K0Grd_a_5xr4smQS8'
 
 print("Bot started ...")
 
 def start_command(update, context):
-    update.message.reply_text('Type something!')
+    update.message.reply_text("Navigation: \n /allgemein \n /nord \n /sued \n /foehn \n")
 
 def help_command(update, context):
     update.message.reply_text('Für den DHV Wetterbericht: \n /allgemein \n /nord \n /sued \n')

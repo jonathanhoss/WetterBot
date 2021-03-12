@@ -1,6 +1,9 @@
 import json
 import saveDhvWetter
 
+foehn_diagramm = "http://www.wetteralarm.at/uploads/pics/uwz-at_foehn_de.png"
+
+
 def loadJson():
     with open('data.json', encoding='utf-8') as fh:
         data = json.load(fh)
@@ -15,7 +18,7 @@ def stringifyWetter(wetterList):
 
 def sample_responses(input_text):
     user_message = str(input_text).lower()
-    navigation = '\n /allgemein \n /nord \n /sued \n'
+    navigation = '\n /allgemein \n /nord \n /sued \n /foehn \n'
 
         
     if user_message in ("nord", "/nord"):
@@ -30,6 +33,9 @@ def sample_responses(input_text):
         wetter = loadJson()
         return stringifyWetter(wetter["allgemein"]) + navigation
 
-    if user_message in ("update"):
+    if user_message in ("foehn", "/foehn", "föhn"):
+        return foehn_diagramm + "\n"  + navigation
+
+    if user_message in ("update", "/update"):
         saveDhvWetter.saveDhvWetter()
         return "Wetter wurde geupdatet"
