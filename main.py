@@ -17,9 +17,16 @@ def help_command(update, context):
 
 def handle_message(update, context):
     text =str(update.message.text).lower()
-    response = R.sample_responses(text)
+    #response = R.sample_responses(text)
+    #update.message.reply_text(response)
 
-    update.message.reply_text(response)
+    messageType, response = R.sample_responses(text)
+    
+    if messageType == "txt":
+        context.bot.send_message(chat_id=update.effective_chat.id, text=response)
+    elif messageType == "img":
+        context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(response, "rb"))
+
     logging.info(f"INPUT: {text} OUTPUT: {response[0:30]}.... ")
 
 def error(update, context):

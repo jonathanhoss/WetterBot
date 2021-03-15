@@ -1,5 +1,6 @@
 import json
 import saveDhvWetter
+import urllib.request
 
 foehn_diagramm = "http://www.wetteralarm.at/uploads/pics/uwz-at_foehn_de.png"
 
@@ -23,19 +24,20 @@ def sample_responses(input_text):
         
     if user_message in ("nord", "/nord"):
         wetter = loadJson()
-        return stringifyWetter(wetter["nord"]) + navigation
+        return "txt", stringifyWetter(wetter["nord"]) + navigation
 
     if user_message in ("süd", "sued", "/süd", "/sued"):
         wetter = loadJson()
-        return stringifyWetter(wetter["süd"]) + navigation
+        return "txt", stringifyWetter(wetter["süd"]) + navigation
 
     if user_message in ("allgemein", "/allgemein"):
         wetter = loadJson()
-        return stringifyWetter(wetter["allgemein"]) + navigation
+        return "txt", stringifyWetter(wetter["allgemein"]) + navigation
 
     if user_message in ("foehn", "/foehn", "föhn"):
-        return foehn_diagramm + "\n"  + navigation
+        urllib.request.urlretrieve("http://www.wetteralarm.at/uploads/pics/uwz-at_foehn_de.png", "foehn.png")
+        return "img", "foehn.png"
 
     if user_message in ("update", "/update"):
         saveDhvWetter.saveDhvWetter()
-        return "Wetter wurde geupdatet"
+        return "txt", "Wetter wurde geupdatet"
